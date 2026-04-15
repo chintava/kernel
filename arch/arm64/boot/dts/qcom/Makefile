@@ -450,6 +450,8 @@ dtb-$(CONFIG_ARCH_QCOM)	+= lemans-camx-el2.dtb
 
 dtb-$(CONFIG_ARCH_QCOM)	+= lemans-evk-staging.dtbo
 
+dtb-$(CONFIG_ARCH_QCOM)	+= lemans-staging.dtbo
+
 monaco-evk-camx-dtbs   := monaco-evk.dtb monaco-evk-camx.dtbo
 
 dtb-$(CONFIG_ARCH_QCOM) += monaco-evk-camx.dtb
@@ -459,6 +461,8 @@ monaco-camx-el2-dtbs	:= monaco-evk-el2.dtb monaco-evk-camx.dtbo monaco-camx-el2.
 dtb-$(CONFIG_ARCH_QCOM)	+= monaco-camx-el2.dtb
 
 dtb-$(CONFIG_ARCH_QCOM)	+= monaco-evk-staging.dtbo
+
+dtb-$(CONFIG_ARCH_QCOM)	+= monaco-staging.dtbo
 
 qcs615-ride-camx-dtbs	:= qcs615-ride.dtb qcs615-ride-camx.dtbo
 
@@ -494,3 +498,7 @@ dtb-$(CONFIG_ARCH_QCOM)	+= sa8775p-ride-r3-camx.dtb
 talos-evk-camx-dtbs	:= talos-evk.dtb talos-evk-camx.dtbo
 
 dtb-$(CONFIG_ARCH_QCOM)	+= talos-evk-camx.dtb
+
+dtb-$(CONFIG_ARCH_QCOM) += talos-staging.dtbo
+
+dtb-$(CONFIG_ARCH_QCOM) += kodiak-staging.dtbo
