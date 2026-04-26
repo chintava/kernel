@@ -386,7 +386,7 @@ static ssize_t inen_store(struct device *dev,
 
 	/* write through if enabled */
 	if (cti_is_active(config))
-		cti_write_single_reg(drvdata, CTIINEN(index), val);
+		cti_write_single_reg(drvdata, CTI_REG_SET_NR(CTIINEN, index), val);
 
 	return size;
 }
@@ -427,7 +427,7 @@ static ssize_t outen_store(struct device *dev,
 
 	/* write through if enabled */
 	if (cti_is_active(config))
-		cti_write_single_reg(drvdata, CTIOUTEN(index), val);
+		cti_write_single_reg(drvdata, CTI_REG_SET_NR(CTIOUTEN, index), val);
 
 	return size;
 }
