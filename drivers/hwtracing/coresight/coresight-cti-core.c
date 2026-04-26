@@ -21,6 +21,7 @@
 
 #include "coresight-priv.h"
 #include "coresight-cti.h"
+#include "qcom-cti.h"
 
 /*
  * CTI devices can be associated with a PE, or be connected to CoreSight
@@ -46,6 +47,10 @@ static void __iomem *cti_reg_addr(struct cti_drvdata *drvdata, int reg)
 {
 	u32 offset = CTI_REG_CLR_NR(reg);
 	u32 nr = CTI_REG_GET_NR(reg);
+
+	/* convert to qcom specific offset */
+	if (unlikely(drvdata->is_qcom_cti))
+		offset = cti_qcom_reg_off(offset);
 
 	return drvdata->base + offset + sizeof(u32) * nr;
 }
@@ -169,6 +174,9 @@ void cti_write_intack(struct device *dev, u32 ackval)
 
 /* DEVID[19:16] - number of CTM channels */
 #define CTI_DEVID_CTMCHANNELS(devid_val) ((int) BMVAL(devid_val, 16, 19))
+
+/* DEVARCH[31:21] - ARCHITECT */
+#define CTI_DEVARCH_ARCHITECT(devarch_val) ((int)BMVAL(devarch_val, 21, 31))
 
 static int cti_set_default_config(struct device *dev,
 				  struct cti_drvdata *drvdata)
@@ -700,6 +708,7 @@ static int cti_probe(struct amba_device *adev, const struct amba_id *id)
 	struct coresight_desc cti_desc;
 	struct coresight_platform_data *pdata = NULL;
 	struct resource *res = &adev->res;
+	u32 devarch;
 
 	/* driver data*/
 	drvdata = devm_kzalloc(dev, sizeof(*drvdata), GFP_KERNEL);
@@ -723,6 +732,22 @@ static int cti_probe(struct amba_device *adev, const struct amba_id *id)
 	INIT_LIST_HEAD(&drvdata->ctidev.trig_cons);
 
 	raw_spin_lock_init(&drvdata->spinlock);
+
+	devarch = readl_relaxed(drvdata->base + CORESIGHT_DEVARCH);
+	if (CTI_DEVARCH_ARCHITECT(devarch) == ARCHITECT_QCOM) {
+		drvdata->is_qcom_cti = true;
+		/*
+		 * QCOM CTI does not implement Claimtag functionality as
+		 * per CoreSight specification, but its CLAIMSET register
+		 * is incorrectly initialized to 0xF. This can mislead
+		 * tools or drivers into thinking the component is claimed.
+		 *
+		 * Reset CLAIMSET to 0 to reflect that no claims are active.
+		 */
+		CS_UNLOCK(drvdata->base);
+		writel_relaxed(0, drvdata->base + CORESIGHT_CLAIMSET);
+		CS_LOCK(drvdata->base);
+	}
 
 	/* initialise CTI driver config values */
 	ret = cti_set_default_config(dev, drvdata);
@@ -780,7 +805,8 @@ static int cti_probe(struct amba_device *adev, const struct amba_id *id)
 
 	/* all done - dec pm refcount */
 	pm_runtime_put(&adev->dev);
-	dev_info(&drvdata->csdev->dev, "CTI initialized\n");
+	dev_info(&drvdata->csdev->dev,
+		 "%sCTI initialized\n", drvdata->is_qcom_cti ? "QCOM " : "");
 	return 0;
 }
 
