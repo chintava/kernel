@@ -1385,9 +1385,10 @@ static int qcom_pcie_host_init(struct dw_pcie_rp *pp)
 err_assert_reset:
 	qcom_pcie_perst_assert(pcie);
 err_pwrctrl_power_off:
-	pci_pwrctrl_power_off_devices(pci->dev);
+	if (!pp->skip_pwrctrl_off)
+		pci_pwrctrl_power_off_devices(pci->dev);
 err_pwrctrl_destroy:
-	if (ret != -EPROBE_DEFER)
+	if (ret != -EPROBE_DEFER && !pci->suspended)
 		pci_pwrctrl_destroy_devices(pci->dev);
 err_disable_phy:
 	qcom_pcie_phy_power_off(pcie);
@@ -2034,11 +2035,6 @@ static int qcom_pcie_suspend_noirq(struct device *dev)
 	ret = dw_pcie_suspend_noirq(pcie->pci);
 	if (ret)
 		return ret;
-
-	if (pcie->pci->suspended)
-		dev_pm_genpd_rpm_always_on(dev, false);
-	else
-		dev_pm_genpd_rpm_always_on(dev, true);
 
 	if (pcie->pci->suspended) {
 		ret = icc_disable(pcie->icc_mem);
