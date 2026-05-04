@@ -63,6 +63,16 @@ properties:
 
       - items:
           - enum:
+              - qcom,glymur-crd
+          - const: qcom,glymur
+
+      - items:
+          - enum:
+              - qcom,mahua-crd
+          - const: qcom,mahua
+
+      - items:
+          - enum:
               - fairphone,fp6
           - const: qcom,milos
 
@@ -876,6 +886,7 @@ properties:
 
       - items:
           - enum:
+              - qcom,monaco-ac-evk
               - qcom,monaco-evk
               - qcom,qcs8300-ride
           - const: qcom,qcs8300
@@ -883,6 +894,7 @@ properties:
       - items:
           - enum:
               - qcom,qcs615-ride
+              - qcom,talos-evk
           - const: qcom,qcs615
           - const: qcom,sm6150
 
@@ -1121,6 +1133,12 @@ properties:
           - const: microsoft,denali-oled
           - const: microsoft,denali
           - const: qcom,x1e80100
+
+      - items:
+          - enum:
+              - qcom,purwa-iot-evk
+          - const: qcom,purwa-iot-som
+          - const: qcom,x1p42100
 
       - items:
           - enum:
