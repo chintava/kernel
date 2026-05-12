@@ -72,7 +72,6 @@ allOf:
       properties:
         compatible:
           enum:
-            - qcom,sa8775p-edp-phy
             - qcom,x1e80100-dp-phy
     then:
       properties:
