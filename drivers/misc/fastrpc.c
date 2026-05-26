@@ -1425,6 +1425,14 @@ static int fastrpc_init_create_static_process(struct fastrpc_user *fl,
 	} inbuf;
 	u32 sc;
 
+	if (!fl->cctx->remote_heap ||
+	    !fl->cctx->remote_heap->phys ||
+	    !fl->cctx->remote_heap->size) {
+		err = -ENOMEM;
+		dev_dbg(fl->sctx->dev, "remote heap memory region is not added\n");
+		return err;
+	}
+
 	args = kcalloc(FASTRPC_CREATE_STATIC_PROCESS_NARGS, sizeof(*args), GFP_KERNEL);
 	if (!args)
 		return -ENOMEM;
