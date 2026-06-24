@@ -1345,15 +1345,15 @@
 			linux,pci-domain = <0>;
 			num-lanes = <1>;
 
-			interrupts = <GIC_SPI 491 IRQ_TYPE_LEVEL_HIGH>,
-				     <GIC_SPI 492 IRQ_TYPE_LEVEL_HIGH>,
-				     <GIC_SPI 493 IRQ_TYPE_LEVEL_HIGH>,
-				     <GIC_SPI 494 IRQ_TYPE_LEVEL_HIGH>,
-				     <GIC_SPI 495 IRQ_TYPE_LEVEL_HIGH>,
-				     <GIC_SPI 496 IRQ_TYPE_LEVEL_HIGH>,
-				     <GIC_SPI 497 IRQ_TYPE_LEVEL_HIGH>,
-				     <GIC_SPI 498 IRQ_TYPE_LEVEL_HIGH>,
-				     <GIC_SPI 489 IRQ_TYPE_LEVEL_HIGH>;
+			interrupts = <GIC_SPI 491 IRQ_TYPE_LEVEL_HIGH 0>,
+				     <GIC_SPI 492 IRQ_TYPE_LEVEL_HIGH 0>,
+				     <GIC_SPI 493 IRQ_TYPE_LEVEL_HIGH 0>,
+				     <GIC_SPI 494 IRQ_TYPE_LEVEL_HIGH 0>,
+				     <GIC_SPI 495 IRQ_TYPE_LEVEL_HIGH 0>,
+				     <GIC_SPI 496 IRQ_TYPE_LEVEL_HIGH 0>,
+				     <GIC_SPI 497 IRQ_TYPE_LEVEL_HIGH 0>,
+				     <GIC_SPI 498 IRQ_TYPE_LEVEL_HIGH 0>,
+				     <GIC_SPI 489 IRQ_TYPE_LEVEL_HIGH 0>;
 			interrupt-names = "msi0",
 					  "msi1",
 					  "msi2",
@@ -1568,8 +1568,8 @@
 			compatible = "qcom,shikra-sdhci", "qcom,sdhci-msm-v5";
 			reg = <0x0 0x4784000 0x0 0x1000>;
 
-			interrupts = <GIC_SPI 350 IRQ_TYPE_LEVEL_HIGH>,
-				     <GIC_SPI 353 IRQ_TYPE_LEVEL_HIGH>;
+			interrupts = <GIC_SPI 350 IRQ_TYPE_LEVEL_HIGH 0>,
+				     <GIC_SPI 353 IRQ_TYPE_LEVEL_HIGH 0>;
 			interrupt-names = "hc_irq", "pwr_irq";
 
 			bus-width = <4>;
@@ -1761,22 +1761,22 @@
 			compatible = "qcom,shikra-gpi-dma", "qcom,sm6350-gpi-dma";
 			reg = <0x0 0x04a00000 0x0 0x60000>;
 
-			interrupts = <GIC_SPI 511 IRQ_TYPE_LEVEL_HIGH>,
-				     <GIC_SPI 512 IRQ_TYPE_LEVEL_HIGH>,
-				     <GIC_SPI 513 IRQ_TYPE_LEVEL_HIGH>,
-				     <GIC_SPI 514 IRQ_TYPE_LEVEL_HIGH>,
-				     <GIC_SPI 515 IRQ_TYPE_LEVEL_HIGH>,
-				     <GIC_SPI 516 IRQ_TYPE_LEVEL_HIGH>,
-				     <GIC_SPI 517 IRQ_TYPE_LEVEL_HIGH>,
-				     <GIC_SPI 518 IRQ_TYPE_LEVEL_HIGH>,
-				     <GIC_SPI 519 IRQ_TYPE_LEVEL_HIGH>,
-				     <GIC_SPI 520 IRQ_TYPE_LEVEL_HIGH>,
-				     <GIC_SPI 521 IRQ_TYPE_LEVEL_HIGH>,
-				     <GIC_SPI 522 IRQ_TYPE_LEVEL_HIGH>,
-				     <GIC_SPI 523 IRQ_TYPE_LEVEL_HIGH>,
-				     <GIC_SPI 524 IRQ_TYPE_LEVEL_HIGH>,
-				     <GIC_SPI 525 IRQ_TYPE_LEVEL_HIGH>,
-				     <GIC_SPI 526 IRQ_TYPE_LEVEL_HIGH>;
+			interrupts = <GIC_SPI 511 IRQ_TYPE_LEVEL_HIGH 0>,
+				     <GIC_SPI 512 IRQ_TYPE_LEVEL_HIGH 0>,
+				     <GIC_SPI 513 IRQ_TYPE_LEVEL_HIGH 0>,
+				     <GIC_SPI 514 IRQ_TYPE_LEVEL_HIGH 0>,
+				     <GIC_SPI 515 IRQ_TYPE_LEVEL_HIGH 0>,
+				     <GIC_SPI 516 IRQ_TYPE_LEVEL_HIGH 0>,
+				     <GIC_SPI 517 IRQ_TYPE_LEVEL_HIGH 0>,
+				     <GIC_SPI 518 IRQ_TYPE_LEVEL_HIGH 0>,
+				     <GIC_SPI 519 IRQ_TYPE_LEVEL_HIGH 0>,
+				     <GIC_SPI 520 IRQ_TYPE_LEVEL_HIGH 0>,
+				     <GIC_SPI 521 IRQ_TYPE_LEVEL_HIGH 0>,
+				     <GIC_SPI 522 IRQ_TYPE_LEVEL_HIGH 0>,
+				     <GIC_SPI 523 IRQ_TYPE_LEVEL_HIGH 0>,
+				     <GIC_SPI 524 IRQ_TYPE_LEVEL_HIGH 0>,
+				     <GIC_SPI 525 IRQ_TYPE_LEVEL_HIGH 0>,
+				     <GIC_SPI 526 IRQ_TYPE_LEVEL_HIGH 0>;
 
 			dma-channels = <16>;
 			dma-channel-mask = <0xff>;
@@ -2931,7 +2931,7 @@
 			      <0x0 0x05d16000 0x0 0x100>;
 			reg-names = "stmmaceth", "rgmii";
 
-			interrupts = <GIC_SPI 478 IRQ_TYPE_LEVEL_HIGH>;
+			interrupts = <GIC_SPI 478 IRQ_TYPE_LEVEL_HIGH 0>;
 			interrupt-names = "macirq";
 
 			clocks = <&gcc GCC_EMAC0_AXI_CLK>,
@@ -2970,7 +2970,7 @@
 			      <0x0 0x05d36000 0x0 0x100>;
 			reg-names = "stmmaceth", "rgmii";
 
-			interrupts = <GIC_SPI 458 IRQ_TYPE_LEVEL_HIGH>;
+			interrupts = <GIC_SPI 458 IRQ_TYPE_LEVEL_HIGH 0>;
 			interrupt-names = "macirq";
 
 			clocks = <&gcc GCC_EMAC1_AXI_CLK>,
